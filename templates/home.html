@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Welcome to Our App</h1>
+            
+            {% if current_user.is_authenticated %}
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title">Hello, {{ current_user.username }}!</h2>
+                        <p class="card-text">
+                            You are already logged in. Access your dashboard or logout below.
+                        </p>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg px-4 gap-3">
+                                Go to Dashboard
+                            </a>
+                            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary btn-lg px-4">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="lead mb-4">
+                            Please login or register to access all features
+                        </p>
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-4 gap-3">
+                                Login
+                            </a>
+                            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg px-4">
+                                Register
+                            </a>
+                        </div>
+                        <div class="mt-3">
+                            <a href="{{ url_for('forgot_password') }}" class="text-muted">
+                                Forgot Password?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            
+            <div class="mt-5">
+                <h3>Features</h3>
+                <div class="row mt-4">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Secure Authentication</h5>
+                                <p class="card-text">
+                                    OTP verification for registration and password resets
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Account Protection</h5>
+                                <p class="card-text">
+                                    Login attempt limiting to prevent brute force attacks
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Easy Recovery</h5>
+                                <p class="card-text">
+                                    Simple password reset process via email OTP
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

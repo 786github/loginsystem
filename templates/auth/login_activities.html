@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Login Activities{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Recent Login Activities</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>IP Address</th>
+                    <th>Location</th>
+                    <th>Browser</th>
+                    <th>Device</th>
+                    <th>Platform</th>
+                </tr>
+            </thead>
+            <tbody>
+                  {% for activity in current_user.login_activities %}
+                  <tr>
+                    <td>{{ activity.login_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ activity.ip_address }}</td>
+                    <td>
+                      {% if activity.postal_code %}{{ activity.postal_code }}, {% endif %}
+                      {{ activity.city }},
+                      {{ activity.region }},
+                      {{ activity.country }}
+                    </td>
+                    <td>{{ activity.browser }}</td>
+                    <td>{{ activity.device }}</td>
+                      <td>{{ activity.platform }}</td>
+
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

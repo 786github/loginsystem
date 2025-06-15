@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Verify Registration{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="text-center mb-4">Verify Registration</h2>
+    <p class="text-center">We've sent a 6-digit OTP to your email</p>
+    <form method="POST" action="{{ url_for('verify_registration') }}">
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            {{ form.otp.label(class="form-label") }}
+            {{ form.otp(class="form-control") }}
+            {% for error in form.otp.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="d-grid mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    
+    <form method="POST" action="{{ url_for('resend_otp') }}">
+        <button type="submit" class="btn btn-link w-100">Resend OTP</button>
+    </form>
+</div>
+{% endblock %}
